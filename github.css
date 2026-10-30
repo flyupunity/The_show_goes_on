@@ -1,0 +1,69 @@
+/* GitHub Primer dark tokens are vendored in primer-dark.css (MIT). */
+:root {
+  color-scheme: dark;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--fgColor-default);
+  background: var(--bgColor-default);
+  font-size: 14px;
+  line-height: 1.5;
+}
+body { background: var(--bgColor-default); }
+::selection { background: var(--bgColor-accent-emphasis); color: var(--fgColor-white); }
+:focus-visible { outline-color: var(--focus-outlineColor); outline-offset: 2px; }
+* { scrollbar-color: var(--borderColor-default) transparent; }
+.home { background: var(--bgColor-default); }
+.home-menu { width: min(100%, 320px); gap: 12px; }
+.menu-button { min-height: 40px; padding: 9px 16px; border: 1px solid var(--button-default-borderColor-rest); border-radius: 6px; background: var(--button-default-bgColor-rest); color: var(--button-default-fgColor-rest); font-size: 14px; font-weight: 600; box-shadow: var(--button-default-shadow-resting); }
+.rag-match { background: var(--bgColor-attention-muted); color: var(--fgColor-attention); border-radius: 2px; }
+.rag-layout { max-width: none; width: 100%; padding: 0; gap: 0; grid-template-columns: minmax(380px, .95fr) minmax(0, 1.2fr); background: var(--bgColor-default); }
+.rag-layout .archive { padding: 0 0 32px; background: var(--bgColor-default); border-right: 1px solid var(--borderColor-default); }
+.search-controls { position: sticky; top: 0; z-index: 3; padding: 20px 24px 12px; background: var(--bgColor-muted); border-bottom: 1px solid var(--borderColor-default); }
+.back-link { color: var(--fgColor-muted); font-size: 12px; }
+.rag-layout .archive-header { margin-top: 20px; }
+.rag-layout .archive-header h1 { font-size: 24px; line-height: 1.25; font-weight: 600; letter-spacing: -.02em; }
+.archive-header p { color: var(--fgColor-muted); font-size: 13px; margin: 8px 0 0; }
+.search-bar { margin-top: 20px; gap: 8px; }
+#search { border: 1px solid var(--borderColor-default); border-radius: 6px; background: var(--bgColor-default); color: var(--fgColor-default); padding: 7px 12px; min-height: 34px; font-size: 14px; box-shadow: inset 0 1px 0 #0104093d; }
+#search::placeholder { color: var(--fgColor-muted); }
+#search:focus { outline: 2px solid var(--focus-outlineColor); outline-offset: -1px; }
+#filter { width: 146px; min-height: 34px; border: 1px solid var(--button-default-borderColor-rest); border-radius: 6px; background: var(--button-default-bgColor-rest); color: var(--fgColor-default); font-size: 12px; padding: 6px 10px; }
+.result-count { margin: 12px 0 0; color: var(--fgColor-muted); font-size: 12px; }
+#entries { padding: 16px 24px 0; }
+.entry { position: relative; margin: 0 0 12px; padding: 20px 16px; border: 1px solid var(--borderColor-default); border-radius: 6px; background: var(--bgColor-default); }
+.entry:hover { background: var(--bgColor-muted); }
+.entry.is-selected { background: var(--bgColor-accent-muted); box-shadow: inset 3px 0 var(--borderColor-accent-emphasis); }
+.entry-meta { color: var(--fgColor-muted); font-size: 11px; }
+.separator { color: var(--borderColor-default); padding: 0 6px; }
+.context-label { color: var(--fgColor-attention); border: 1px solid var(--borderColor-attention-muted); border-radius: 2em; padding: 0 7px; font-size: 10px; }
+.description { color: var(--fgColor-default); font-size: 13px; line-height: 1.6; }
+.search-match { color: var(--fgColor-muted); font-size: 12px; border-color: var(--borderColor-default); margin-top: 12px; }
+.search-match a { color: var(--fgColor-accent); text-decoration-color: currentColor; }
+.empty-state { color: var(--fgColor-muted); }
+.mobile-channel-toggle, .back-link { border-radius: 6px; padding: 5px 10px; }
+@media (max-width: 1100px) and (min-width: 901px) {
+  .rag-layout { padding: 0; gap: 0; grid-template-columns: 380px minmax(0, 1fr); }
+  .search-controls { padding: 20px 20px 12px; }
+  #entries { padding-left: 20px; padding-right: 20px; }
+  .search-bar { flex-wrap: wrap; }
+  #search { flex-basis: 100%; }
+  #filter { width: auto; }
+}
+@media (max-width: 900px) {
+  .rag-layout { display: block; padding: 0; }
+  .rag-layout .archive { padding: 0 0 32px; border: 0; }
+  .search-controls { padding: 20px; }
+  .mobile-channel-toggle { margin-top: 16px; }
+  #entries { padding: 16px 20px 0; }
+}
+@media (max-width: 520px) {
+  .search-controls { padding: 20px 16px 12px; }
+  #entries { padding: 16px 12px 0; }
+  .entry { padding: 18px 14px; }
+  #filter { width: auto; }
+}
+
+
+:is(.menu-button[href], .back-link, .mobile-channel-toggle, .button.primary, a.button, .home-link, .nav-task) { color: var(--button-primary-fgColor-rest); background: var(--button-primary-bgColor-rest); border: 1px solid var(--button-primary-borderColor-rest); }
+:is(.menu-button[href], .back-link, .mobile-channel-toggle, .button.primary, a.button, .home-link, .nav-task):hover { color: var(--button-primary-fgColor-rest); background: var(--button-primary-bgColor-hover); text-decoration: none; }
+:is(.menu-button[href], .back-link, .mobile-channel-toggle, .button.primary, a.button, .home-link, .nav-task):active { background: var(--button-primary-bgColor-active); }
+:is(.menu-button[href], .back-link, .mobile-channel-toggle, .button.primary, a.button, .home-link, .nav-task):disabled { background: var(--button-default-bgColor-rest); color: var(--fgColor-muted); border-color: var(--borderColor-default); }

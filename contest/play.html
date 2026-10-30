@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru" data-color-mode="dark" data-dark-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Учебный контест: условия, выбор вариантов и ввод ответов без регистрации.">
+  <title>Контест · Решение задач</title>
+  <link rel="stylesheet" href="../primer-dark.css">
+  <link rel="stylesheet" href="../github.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Обзор контеста"><span class="brand-mark">DΛNO</span><span class="brand-caption">тренировка</span></a>
+    <div class="contest-name" id="contest-name">Контест</div>
+    <a class="home-link" href="../index.html">← Главная</a>
+    <div class="clock-wrap"><span class="clock-label">Время решения</span><time id="clock">00:00:00</time></div>
+  </header>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Навигация по контесту">
+      <button class="button primary library-button" id="library-btn">← Все контесты</button><label class="picker-label" for="contest-picker">Контест</label><select id="contest-picker" aria-label="Выбрать контест"></select><div class="sidebar-top"><span class="eyebrow" id="sidebar-year">DANO / 2025</span><h2>Твой контест</h2><p id="progress-label">Заполнено 0 из 20</p><div class="progress-track"><span id="progress-bar"></span></div></div>
+      <nav id="task-nav" aria-label="Задачи"></nav>
+      <div class="nav-legend"><span>○ Пусто</span><span>◐ Есть ответ</span><span>● Проверено верно</span><span>⚑ На потом</span></div>
+      <div class="sidebar-actions"><button id="overview-btn" class="button primary">Обзор контеста</button><button id="finish-btn" class="button primary">Завершить попытку</button><button id="export-btn" class="button ghost">Скачать ответы</button></div>
+      <p id="save-status" class="save-status" role="status">Ответы сохраняются в этом браузере</p>
+    </aside>
+    <main id="main" tabindex="-1"></main>
+  </div>
+  <dialog id="finish-dialog" aria-labelledby="finish-title"><div class="dialog-content"><span class="eyebrow">Попытка</span><h2 id="finish-title">Завершить решение?</h2><p id="finish-summary"></p><p>Ответы сохранятся. Их можно скачать и отправить в чат для проверки. Закрытые и числовые ответы можно проверять автоматически. Развёрнутые решения проверяются по критериям. Ответы можно редактировать и проверять даже после завершения.</p><div class="actions"><button class="button" id="cancel-finish">Продолжить решать</button><button class="button primary" id="confirm-finish">Завершить</button></div></div></dialog>
+  <dialog id="image-dialog" aria-label="График в полном размере"><button class="button" id="close-image">Закрыть ×</button><img id="large-image" alt=""></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script src="catalog.js"></script>
+  <script src="vk-catalog.js"></script>
+  <script src="grader.js"></script>
+  <script src="answer-keys.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
