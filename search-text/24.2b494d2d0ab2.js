@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["24"]={"1712":"Хендбук по алгоритмам\nhttps://education.yandex.ru/handbook/algorithms\n\nКраткое описание:\nХендбук Яндекса по алгоритмам и структурам данных с объяснениями и задачами по программированию."};

@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["392"]={"1847":"День открытых дверей Т-Поколения\nhttps://l.tbank.ru/t-generation-openday\n\nКраткое описание:\nСсылка на день открытых дверей Т-Поколения для знакомства с образовательными программами; дата в сохранённом сообщении отсутствует."};

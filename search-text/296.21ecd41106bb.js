@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["296"]={"1798":"Летняя школа ЦУ\nhttps://cu.ru/events/summer-school\n\nКраткое описание:\nСсылка на летнюю школу Центрального университета; программа и сроки конкретного набора в сохранённом сообщении не раскрыты."};

@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["114"]={"1738":"Вложение без подписи\n\n\nКраткое описание:\nВложение без доступного текста и пояснения; определить учебную тему по сохранённым данным нельзя."};

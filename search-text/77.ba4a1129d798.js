@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["77"]={"1724":"TensorFlow Playground\nhttps://playground.tensorflow.org/\n\nКраткое описание:\nTensorFlow Playground — интерактивная песочница нейросетей: можно менять данные, слои и параметры обучения и наблюдать границы классификации."};

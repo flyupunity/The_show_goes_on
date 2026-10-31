@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["259"]={"1779":"Telegram-канал без описания\nhttps://t.me/an_interesting_place\n\nКраткое описание:\nСсылка на Telegram-канал an_interesting_place без пояснения. Его тема и причина сохранения пока не установлены."};

@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["379"]={"1840":"T-Lab\nhttps://education.tbank.ru/academy/t-lab/\n\nКраткое описание:\nСсылка на образовательную программу T-Lab Т-Банка. Программа и сроки конкретного набора в сохранённом тексте не раскрыты."};

@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["254"]={"1774":"Канал ВСОС ИИ\nвсоси на всосии -\u003e @vsos_ai\n\nКраткое описание:\nСсылка на сообщество @vsos_ai с задачами и тренировками по ИИ; название канала «ВСОС ИИ» не обозначает ни ВсОШ, ни ВКшный «Всерос»."};

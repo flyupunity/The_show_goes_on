@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["118"]={"1739":"Реакция без пояснения\n😁\n\nКраткое описание:\nРеакция одним эмодзи без ссылки и пояснения; связь с учебными материалами не установлена."};

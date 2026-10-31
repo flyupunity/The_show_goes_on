@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["372"]={"1837":"Новые задачи AICC на Kaggle\nhttps://www.kaggle.com/organizations/aicc/competitions открылись новые задачи!\n\nКраткое описание:\nСтраница соревнований организации AICC на Kaggle для поиска новых задач по ИИ; конкретная задача и её дедлайн в посте не выбраны."};

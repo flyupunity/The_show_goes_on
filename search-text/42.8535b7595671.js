@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["42"]={"1715":"Заметка об arena.ai\narena.ai - штука замечательнейшая, но просто так не откроется и крадёт cookies в большом количестве\n\nКраткое описание:\nЛичное впечатление автора о сервисе arena.ai; замечание о сборе cookies не подтверждено независимой проверкой."};

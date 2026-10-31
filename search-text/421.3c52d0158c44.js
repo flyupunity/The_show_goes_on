@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["421"]={"1865":"«Курс алгебры» Винберга\nhttps://dl.libcats.org/genesis/130000/06b04da51d0edaa2f5791595515f0964/_as/[Vinberg_YE.B.]_Kurs_algebrue(libcats.org).pdf\n\nКраткое описание:\nPDF учебника Эрика Винберга «Курс алгебры». Название установлено по имени файла; полный текст книги не извлечён."};

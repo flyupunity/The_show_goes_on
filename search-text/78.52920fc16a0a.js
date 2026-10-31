@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["78"]={"1725":"3Blue1Brown\n3Blue1Brown\n\nКраткое описание:\nЗакладка на 3Blue1Brown — визуальные объяснения линейной алгебры, матанализа и нейросетей; сайт и видео сохранены также в №161 и №226."};

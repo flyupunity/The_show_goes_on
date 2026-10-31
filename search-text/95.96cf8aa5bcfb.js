@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["95"]={"1730":"Ссылка на изображение №94\nСпасибо https://t.me/baconwaffles )))\n\nНЕПОЛНАЯ ЦИТАТА (https://t.me/ClassicalML/94):\nPhoto\n\nКраткое описание:\nБлагодарность автору изображения из №94. Само изображение не распознано, поэтому его учебная тема пока не установлена."};

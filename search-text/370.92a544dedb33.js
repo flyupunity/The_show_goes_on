@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["370"]={"1835":"Канал о хакатонах\n@hackathons_pro\n\nКраткое описание:\nСсылка на канал @hackathons_pro с анонсами хакатонов; отдельное соревнование в сообщении не указано."};

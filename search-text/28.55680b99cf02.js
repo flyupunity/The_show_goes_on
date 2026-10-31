@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["28"]={"1713":"Заметка без контекста\nокак\n\nКраткое описание:\nЛичная реакция «окак» без ссылки или пояснения; учебная тема сообщения не установлена."};

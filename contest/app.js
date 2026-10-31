@@ -1,4 +1,4 @@
-(() => {
+window.CONTEST_APP_START = () => {
   'use strict';
   const g=window.CONTEST_ENGINE, $=id=>document.getElementById(id), esc=g.escapeHTML;
   const series=g.seriesConfig(new URLSearchParams(location.search).get('series'),window);
@@ -78,21 +78,16 @@
     });
     feedback(task);
   }
-  const labels={correct:'✓ Верно',incorrect:'Пока неверно',empty:'Введите или выберите ответ',invalid:'Проверьте формат числа',manual:'Требуется самопроверка'};
-  function resultHTML(result) {
-    const criteria=result.criteria?.length?`<details class="rubric"><summary>Критерии самопроверки</summary><ul>${result.criteria.map(c=>`<li>${esc(c)}</li>`).join('')}</ul></details>`:'';
-    return `<strong>${esc(labels[result.status]||'Проверены не все пункты')}</strong>${result.note?`<p>${esc(result.note)}</p>`:''}${criteria}${result.status==='manual'&&!criteria?'<p>Автоматический ответ для этого пункта не задан.</p>':''}`;
-  }
   function feedback(task) {
     $('answer-progress').textContent=`${answered(task)} из ${task.fields.length} заполнено`;
     for (const f of task.fields) {
       const wrapper=[...$('answer-form').children].find(el=>el.dataset.field===f.key), last=state.fieldChecks[task.id]?.[f.key], result=g.fieldResult(state,task,f,keys[task.id]);
       const box=wrapper.querySelector('[data-feedback]');box.hidden=!last;box.className='field-feedback'+(result?' field-feedback-'+result.status:'');
-      box.innerHTML=result?resultHTML(result):'Ответ изменён. Проверьте этот пункт снова.';
+      box.innerHTML=result?g.feedbackHTML(result):'Ответ изменён. Проверьте этот пункт снова.';
       wrapper.querySelector('[data-attempts]').textContent=`Попыток: ${last?.attempts||0} · без ограничений`;
     }
     const result=checked(task), box=$('check-result');box.hidden=!result;
-    if(result){box.className='check-result check-result-'+result.status;box.innerHTML=resultHTML(result)+`<p>${result.automatic?`Автоматически верно: ${result.counts.correct} из ${result.automatic}. `:''}${result.counts.manual?`Самопроверка: ${result.counts.manual}.`:''}</p>`;}
+    if(result){box.className='check-result check-result-'+result.status;box.innerHTML=g.feedbackHTML(result)+`<p>${result.automatic?`Автоматически верно: ${result.counts.correct} из ${result.automatic}. `:''}${result.counts.manual?`Самопроверка: ${result.counts.manual}.`:''}</p>`;}
     $('check-attempts').textContent=`Проверок всего задания: ${state.checks[task.id]?.attempts||0}`;
   }
   function check(task,field) {g.recordCheck(state,task,field);persist();paintNav();feedback(task);}
@@ -140,4 +135,4 @@
   window.addEventListener('hashchange',()=>{const id=Number(location.hash.match(/^#task-(\d+)$/)?.[1]);if(tasks.some(t=>t.id===id)){state.current=id;render();}});
   const id=Number(location.hash.match(/^#task-(\d+)$/)?.[1]);if(tasks.some(t=>t.id===id))state.current=id;
   render();setInterval(()=>{$('clock').textContent=timeString(elapsed());},1000);
-})();
+};

@@ -25,6 +25,14 @@
     return !rule || rule.kind === 'manual' || (rule.kind === 'anyOf' && rule.rules.every(isManual));
   }
   function checkRule(rule, value, field = {}) {
+    return feedbackData(evaluateRule(rule,value,field));
+  }
+  function feedbackData(result, allowed = true) {
+    const reveal=allowed && ['correct','manual'].includes(result.status);
+    return {...result,note:reveal?(result.note || ''):'',criteria:reveal?(result.criteria || []):[],
+      ...(!reveal && result.results?{results:result.results.map(r=>feedbackData(r,false))}:{})};
+  }
+  function evaluateRule(rule, value, field = {}) {
     const common = {note:rule?.note || '',criteria:rule?.criteria || [],manual:isManual(rule)};
     if (!filled(value)) return {...common,status:'empty'};
     if (!rule || rule.kind === 'manual') return {...common,status:'manual'};
@@ -113,9 +121,19 @@
   function beginAnswer(state, now = Date.now()) {
     if (!state.started && !state.finished) {state.started=true;state.runningSince=now;}
   }
-  function fieldResult(state, task, field, taskKey = {}) {
+  function checkedField(state, task, field, taskKey) {
     const last=state.fieldChecks[task.id]?.[field.key], value=state.answers[task.id]?.[field.key];
     return last && last.fingerprint===fieldFingerprint(value) ? {key:field.key,label:field.label,...checkRule(taskKey.fields?.[field.key],value,field)} : null;
+  }
+  function fieldResult(state, task, field, taskKey = {}) {
+    const result=checkedField(state,task,field,taskKey);
+    if (!result || (!result.note && !result.criteria.length)) return result;
+    // A sibling's explanation can contain answers for the whole task.
+    const reveal=task.fields.every(f=>{
+      const rule=taskKey.fields?.[f.key], answer=state.answers[task.id]?.[f.key], checked=state.fieldChecks[task.id]?.[f.key];
+      return isManual(rule) || (checked?.fingerprint===fieldFingerprint(answer) && checkRule(rule,answer,f).status==='correct');
+    });
+    return feedbackData(result,reveal);
   }
   function checkTask(task, answers = {}, taskKey = {}) {
     const results=task.fields.map(field=>({key:field.key,label:field.label,...checkRule(taskKey.fields?.[field.key],answers[field.key],field)}));
@@ -128,13 +146,18 @@
     if(counts.incorrect || counts.invalid)status='incorrect';
     else if(counts.empty)status='incomplete';
     else if(counts.manual)status='manual';
-    return {status,results,counts,note:taskKey.note || '',criteria:taskKey.criteria || [],automatic:results.filter(r=>!r.manual).length};
+    return feedbackData({status,results,counts,note:taskKey.note || '',criteria:taskKey.criteria || [],automatic:results.filter(r=>!r.manual).length});
   }
   function checkedTask(state, task, taskKey = {}) {
-    const results=task.fields.map(f=>fieldResult(state,task,f,taskKey));
+    const results=task.fields.map(f=>checkedField(state,task,f,taskKey));
     return results.every(Boolean) ? summarize(results,taskKey) : null;
   }
-  const api=Object.freeze({filled,normalizeText,parseNumber,isManual,checkRule,checkTask,fingerprint,fieldFingerprint,escapeHTML,storageKey,seriesConfig,freshState,restoreState,recordCheck,fieldResult,checkedTask,beginAnswer});
+  function feedbackHTML(result) {
+    const safe=feedbackData(result), labels={correct:'✓ Верно',incorrect:'Пока неверно',empty:'Введите или выберите ответ',invalid:'Проверьте формат числа',manual:'Требуется самопроверка'};
+    const criteria=safe.criteria.length?`<details class="rubric"><summary>Критерии самопроверки</summary><ul>${safe.criteria.map(c=>`<li>${escapeHTML(c)}</li>`).join('')}</ul></details>`:'';
+    return `<strong>${escapeHTML(labels[safe.status]||'Проверены не все пункты')}</strong>${safe.note?`<p>${escapeHTML(safe.note)}</p>`:''}${criteria}${safe.status==='manual'&&!criteria?'<p>Автоматический ответ для этого пункта не задан.</p>':''}`;
+  }
+  const api=Object.freeze({filled,normalizeText,parseNumber,isManual,checkRule,checkTask,fingerprint,fieldFingerprint,escapeHTML,storageKey,seriesConfig,freshState,restoreState,recordCheck,fieldResult,checkedTask,beginAnswer,feedbackHTML});
   root.CONTEST_ENGINE=api;
   root.DANO_GRADER=api;
   if(typeof module!=='undefined' && module.exports)module.exports=api;

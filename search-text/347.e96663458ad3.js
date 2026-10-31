@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["347"]={"1831":"Реакция с самоссылкой\nЛя круто\n\nНЕПОЛНАЯ ЦИТАТА (https://t.me/ClassicalML/347):\nЛя круто\n\nКраткое описание:\nКороткая реакция «Ля круто» с самоссылкой. Сам материал, к которому относится реакция, не восстановлен."};

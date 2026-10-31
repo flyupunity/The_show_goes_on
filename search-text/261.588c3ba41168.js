@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["261"]={"1781":"Навигация по ВСОС ИИ\nhttps://t.me/vsos_ai/s/1\n\nЦитируемый оригинал (Пошло поехало, https://t.me/ClassicalML/254):\nвсоси на всосии -\u003e @vsos_ai\n\nКраткое описание:\nНавигационная ссылка на канал любительских ML-соревнований «ВСОС ИИ» @vsos_ai, упомянутый в №254."};

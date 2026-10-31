@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["282"]={"1794":"«Вектор ИИ» 2026\nhttps://ai-academy.ru/events/vector-ii-2026/\n\nКраткое описание:\nЛетний онлайн-буткемп «Вектор ИИ» июня–августа 2026: три уровня ML, вебинары, ноутбуки и разборы задач. Летний поток уже завершился; осенний набор находится в №462."};

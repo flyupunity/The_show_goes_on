@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["325"]={"1814":"Сайт FAIO\nfaio.kz\n\nКраткое описание:\nОфициальный сайт международной школьной олимпиады FAIO в Казахстане: правила, материалы и результаты. Соревновательные туры финала 2026 проходили 27–28 октября."};

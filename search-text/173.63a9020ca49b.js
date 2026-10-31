@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["173"]={"1749":"Вложение без подписи\n\n\nКраткое описание:\nВложение без доступного текста и подписи. Его тема и связь с олимпиадами пока не установлены."};

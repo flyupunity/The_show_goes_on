@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["260"]={"1780":"Сайт vega.ru\nhttps://vega.ru/\n\nКраткое описание:\nСайт фонда «Институт Вега» с курсами, школами, семинарами и исследовательскими программами по финансовой математике для студентов."};

@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["273"]={"1787":"Дипломы РСОШ за 2026 год\nhttps://diploma.rsr-olymp.ru/2026/\n\nКраткое описание:\nСервис поиска и скачивания электронных дипломов олимпиад из перечня РСОШ за 2026 год."};

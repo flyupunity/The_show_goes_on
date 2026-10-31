@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["22"]={"1710":"ML-хендбук Яндекса\nhttps://education.yandex.ru/handbook/ml\n\nКраткое описание:\nОнлайн-учебник ШАД Яндекса по машинному обучению: классические алгоритмы, оценка моделей, нейросети, генеративные и рекомендательные системы."};

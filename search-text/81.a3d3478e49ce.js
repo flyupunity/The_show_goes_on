@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["81"]={"1726":"Deep Learning School\nhttps://dls.samcs.ru/\n\nКраткое описание:\nСайт Deep Learning School МФТИ с курсами по машинному обучению, нейросетям и обработке речи, программами потоков и учебными материалами."};

@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["438"]={"1879":"Неофициальный канал ai_cpm\nhttps://t.me/ai_cpm\nP.S. это неофициальный, если что\n\nКраткое описание:\nСсылка на Telegram-канал ai_cpm, который автор прямо помечает как неофициальный; конкретная программа или контест не названы."};

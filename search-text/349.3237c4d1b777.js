@@ -1,0 +1,1 @@
+globalThis.ragSearchTexts=globalThis.ragSearchTexts||{};globalThis.ragSearchTexts["349"]={"1832":"Недоступный материал SIT_team\n\n\nКраткое описание:\nСсылка на публикацию SIT_team/348, скрытую в публичной версии Telegram. Текст оригинала и его тема пока недоступны."};
