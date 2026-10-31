@@ -82,7 +82,7 @@
       caption:vk?'ВКшный Всерос · РСОШ II уровня':'DANO · Анализ данных',
       catalog:(vk?source.VK_CONTEST_CATALOG:source.CONTEST_CATALOG)||[],keys:(vk?source.VK_CONTEST_ANSWER_KEYS:source.CONTEST_ANSWER_KEYS)||{}};
   }
-  const freshState = () => ({version:1,answers:{},notes:{},flags:{},checks:{},fieldChecks:{},elapsed:0,runningSince:null,started:false,finished:false,current:0,updatedAt:null});
+  const freshState = () => ({version:1,answers:{},notes:{},flags:{},checks:{},fieldChecks:{},manualSolved:{},elapsed:0,runningSince:null,started:false,finished:false,current:0,updatedAt:null});
   function restoreState(saved, tasks, now = Date.now()) {
     if (!saved || saved.version !== 1 || !saved.answers || typeof saved.answers !== 'object') return null;
     const state=freshState();
@@ -91,12 +91,15 @@
     for (const task of tasks) {
       const answers=state.answers[task.id]={};
       state.fieldChecks[task.id]={};
+      state.manualSolved[task.id]={};
       for (const field of task.fields) {
         const value=saved.answers[task.id]?.[field.key];
         if (field.type==='multi' && Array.isArray(value)) answers[field.key]=field.options.filter(o=>value.includes(o));
         else if (typeof value==='string' && (!['choice','select'].includes(field.type) || field.options.includes(value))) answers[field.key]=value.slice(0,field.type==='textarea'?100000:2000);
         const last=check(saved.fieldChecks?.[task.id]?.[field.key]);
         if (last) state.fieldChecks[task.id][field.key]=last;
+        const confirmed=saved.manualSolved?.[task.id]?.[field.key];
+        if (typeof confirmed==='string' && filled(answers[field.key]) && confirmed===fieldFingerprint(answers[field.key])) state.manualSolved[task.id][field.key]=confirmed;
       }
       if (typeof saved.notes?.[task.id]==='string') state.notes[task.id]=saved.notes[task.id].slice(0,100000);
       if (saved.flags?.[task.id]===true) state.flags[task.id]=true;
@@ -111,6 +114,7 @@
     state.runningSince=state.started && !state.finished && Number.isFinite(saved.runningSince) && saved.runningSince>0 && saved.runningSince<=now ? saved.runningSince : null;
     state.current=tasks.some(t=>t.id===saved.current)?saved.current:0;
     state.updatedAt=typeof saved.updatedAt==='string'?saved.updatedAt:null;
+    if (saved.timer && typeof saved.timer==='object' && !Array.isArray(saved.timer)) state.timer={...saved.timer};
     return state;
   }
   function recordCheck(state, task, fieldKey, at = new Date().toISOString()) {

@@ -1,6 +1,7 @@
 window.CONTEST_LIBRARY_START = () => {
   const g=window.CONTEST_ENGINE, series=g.seriesConfig(new URLSearchParams(location.search).get('series'),window), esc=g.escapeHTML;
   const catalog=series.catalog.map(c=>({...c,series:series.id}));
+  window.CONTEST_PROGRESS?.attach({series,catalog});
   const progress=c=>{try{return g.restoreState(JSON.parse(localStorage.getItem(g.storageKey(c))),c.tasks);}catch(_){return null;}};
   document.title=series.name+' · Контесты';document.querySelector('.brand-mark').textContent=series.brand;
   document.querySelector('.brand').href='index.html'+series.query;

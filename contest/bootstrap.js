@@ -22,6 +22,7 @@
       let manifest=window.CONTEST_MANIFESTS?.[series];
       if(!manifest) {await load(`manifest-${series}.js`);manifest=window.CONTEST_MANIFEST;}
       if(manifest?.series!==series || !manifest.catalog?.length) throw Error('Не удалось прочитать каталог.');
+      window.CONTEST_MANIFESTS ||= {};window.CONTEST_MANIFESTS[series]=manifest;
       let catalog=manifest.catalog, keys={};
       if(play) {
         const requested=new URLSearchParams(location.search).get('contest');
