@@ -47,7 +47,10 @@ window.CONTEST_APP_START = () => {
     const s=stats();$('contest-name').textContent=`${selected.year} / ${selected.title}`;$('sidebar-year').textContent=series.name+' / '+selected.year;
     const progress=window.CONTEST_PROGRESS.calculate([selectedMetadata],{[selected.id]:state}),percent=window.CONTEST_PROGRESS.formatPercent(progress.percent);
     $('progress-label').textContent=`${percent}% · зачтено ${progress.solvedTasks} из ${tasks.length} · заполнено ${s.full}`;$('progress-bar').style.width=progress.percent+'%';
+    $('progress-flagged').style.width=progress.flaggedPercent+'%';
+    $('variant-earned-legend').textContent=`Зачтено · ${percent}%`;$('variant-flagged-legend').textContent=`На потом: ${progress.flaggedTasks} · ${window.CONTEST_PROGRESS.formatPercent(progress.flaggedPercent)}% веса`;
     const track=$('progress-bar').parentElement;track.setAttribute('role','progressbar');track.setAttribute('aria-label','Прогресс варианта с учётом сложности');track.setAttribute('aria-valuemin','0');track.setAttribute('aria-valuemax','100');track.setAttribute('aria-valuenow',String(Math.round(progress.percent*10)/10));
+    track.setAttribute('aria-valuetext',window.CONTEST_PROGRESS.ariaText(progress));
     $('task-nav').innerHTML=tasks.map(t=>`<button data-task="${t.id}" class="nav-task ${state.current===t.id?'active':''} ${checked(t)?.status==='correct'?'complete':''} ${state.flags[t.id]?'flagged':''}" ${state.current===t.id?'aria-current="page"':''} aria-label="Задача ${t.id}. ${esc(t.title)}. ${status(t)}">${t.id}</button>`).join('');
     $('finish-btn').textContent=state.finished?'Итоги попытки':'Завершить попытку';$('finish-btn').disabled=!state.started;paintClock();
   }

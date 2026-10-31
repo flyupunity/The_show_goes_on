@@ -4,8 +4,9 @@
   const g=root.CONTEST_ENGINE || (typeof require==='function'?require('./grader.js'):null);
   const weight=task=>Number.isFinite(task.difficultyWeight)&&task.difficultyWeight>0?task.difficultyWeight:1;
   const formatPercent=value=>value>0&&value<0.1?'<0,1':(value<100?Math.min(99.9,value):value).toLocaleString('ru-RU',{maximumFractionDigits:1});
+  const ariaText=progress=>`Зачтено ${formatPercent(progress.percent)}% веса; на потом ${formatPercent(progress.flaggedPercent)}% веса, отмечено задач: ${progress.flaggedTasks}.`;
   function calculate(catalog, states={}) {
-    const result={earned:0,total:0,automaticWeight:0,manualWeight:0,solvedTasks:0,filledTasks:0,tasks:0,automaticFields:0,manualFields:0,filledFields:0,pendingFields:0,incorrectFields:0};
+    const result={earned:0,total:0,automaticWeight:0,manualWeight:0,solvedTasks:0,filledTasks:0,tasks:0,automaticFields:0,manualFields:0,filledFields:0,pendingFields:0,incorrectFields:0,flaggedTasks:0,flaggedWeight:0};
     for(const contest of catalog) {
       const state=states[contest.id] || {};
       for(const task of contest.tasks) {
@@ -31,10 +32,13 @@
         }
         if(fields.length&&done===fields.length)result.solvedTasks++;
         if(fields.length&&filled===fields.length)result.filledTasks++;
+        if(state.flags?.[task.id]===true) {result.flaggedTasks++;result.flaggedWeight+=taskWeight*(fields.length?1-done/fields.length:1);}
       }
     }
-    result.earned=Math.min(result.total,result.automaticWeight+result.manualWeight);
+    result.earned=result.tasks&&result.solvedTasks===result.tasks?result.total:Math.min(result.total,result.automaticWeight+result.manualWeight);
+    result.flaggedWeight=Math.min(result.flaggedWeight,Math.max(0,result.total-result.earned));
     result.percent=result.total?100*result.earned/result.total:0;
+    result.flaggedPercent=result.total?Math.min(Math.max(0,100-result.percent),100*result.flaggedWeight/result.total):0;
     return result;
   }
   function readStates(catalog,storage) {
@@ -53,7 +57,7 @@
     dispose?.();document.getElementById('series-progress')?.remove();
     const panel=document.createElement('section');panel.id='series-progress';panel.className='series-progress';panel.setAttribute('aria-label','Общий прогресс '+series.name);
     const esc=g.escapeHTML;
-    panel.innerHTML=`<div class="series-progress-heading"><span><strong>${esc(series.name)} · общий прогресс</strong><span class="series-progress-scope">Все ${catalog.length} вариантов · учебный вес по сложности</span></span><strong data-series-percent>0%</strong></div><div class="series-progress-track" role="progressbar" aria-label="Общий прогресс ${esc(series.name)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span data-series-fill></span></div><div class="series-progress-meta"><span data-series-summary></span><span data-series-confirmed></span></div><details class="series-progress-help"><summary>Как считается прогресс</summary><p>Сложность оценивается от 1 до 3. Вес отбора — 1–3, основного этапа или второго отбора — 4–6, финала — 7–9; у тренировочного банка — 1–3. Поэтому любая задача следующего этапа весит больше задачи предыдущего. Пункты делят вес задачи поровну. Засчитываются проверенные верные ответы и явно подтверждённая самопроверка. Это учебная оценка, а не официальные баллы олимпиады.</p></details><p class="series-progress-warning" data-series-warning hidden>Сохранённый прогресс доступен не полностью. Проверьте настройки хранения браузера и сохраните JSON прогресса.</p>`;
+    panel.innerHTML=`<div class="series-progress-heading"><span><strong>${esc(series.name)} · общий прогресс</strong><span class="series-progress-scope">Все ${catalog.length} вариантов · учебный вес по сложности</span></span><strong data-series-percent>0%</strong></div><div class="series-progress-track" role="progressbar" aria-label="Общий прогресс ${esc(series.name)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span data-series-fill></span><span data-series-flagged></span></div><div class="progress-legend"><span class="progress-earned" data-series-earned-legend></span><span class="progress-flagged" data-series-flagged-legend></span></div><div class="series-progress-meta"><span data-series-summary></span><span data-series-confirmed></span></div><details class="series-progress-help"><summary>Как считается прогресс</summary><p>Сложность оценивается от 1 до 3. Вес отбора — 1–3, основного этапа или второго отбора — 4–6, финала — 7–9; у тренировочного банка — 1–3. Поэтому любая задача следующего этапа весит больше задачи предыдущего. Пункты делят вес задачи поровну. Засчитываются проверенные верные ответы и явно подтверждённая самопроверка. Оранжевым показан только ещё не зачтённый вес задач «На потом»; отметка не увеличивает процент решения. Это учебная оценка, а не официальные баллы олимпиады.</p></details><p class="series-progress-warning" data-series-warning hidden>Сохранённый прогресс доступен не полностью. Проверьте настройки хранения браузера и сохраните JSON прогресса.</p>`;
     document.querySelector('.topbar').after(panel);
     let storage,loaded;
     function reload() {
@@ -67,7 +71,11 @@
       const progress=calculate(catalog,states),percent=formatPercent(progress.percent);
       panel.querySelector('[data-series-percent]').textContent=percent+'%';
       panel.querySelector('[data-series-fill]').style.width=progress.percent+'%';
+      panel.querySelector('[data-series-flagged]').style.width=progress.flaggedPercent+'%';
       panel.querySelector('[role="progressbar"]').setAttribute('aria-valuenow',String(Math.round(progress.percent*10)/10));
+      panel.querySelector('[role="progressbar"]').setAttribute('aria-valuetext',ariaText(progress));
+      panel.querySelector('[data-series-earned-legend]').textContent=`Зачтено · ${percent}%`;
+      panel.querySelector('[data-series-flagged-legend]').textContent=`На потом: ${progress.flaggedTasks} · ${formatPercent(progress.flaggedPercent)}% веса`;
       panel.querySelector('[data-series-summary]').textContent=`Зачтено ${progress.solvedTasks} из ${progress.tasks} задач · заполнено ${progress.filledTasks}`;
       panel.querySelector('[data-series-confirmed]').textContent=`Верных пунктов: ${progress.automaticFields} · самопроверка: ${progress.manualFields}`;
       panel.querySelector('[data-series-warning]').hidden=!loaded.unavailable;
@@ -79,6 +87,6 @@
     dispose=()=>{document.removeEventListener('contest:progress',update);root.removeEventListener('storage',storageChanged);root.removeEventListener('pageshow',refresh);};
     update();return {update,refresh,destroy:dispose};
   }
-  const api=Object.freeze({calculate,readStates,attach,weight,formatPercent});root.CONTEST_PROGRESS=api;
+  const api=Object.freeze({calculate,readStates,attach,weight,formatPercent,ariaText});root.CONTEST_PROGRESS=api;
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);
